@@ -5,11 +5,15 @@ import RootLayout from './Components/RootLayout';
 import Home from './Components/Home';
 import Register from './Components/Register';
 import Login from './Components/Login';
-import Technologies from './Components/Technologies';
+// import Technologies from './Components/Technologies';
+import { lazy,Suspense } from 'react';
+const Technologies= lazy(()=>import("./Components/Technologies"));
+
 import UserProfile from './Components/UserProfile';
 import Java from './Components/java';
 import Node from './Components/Nodejs';
 import Vue from './Components/Vue';
+import RoutingError from './Components/RouterError';
 
 const App = () => {
 
@@ -18,6 +22,7 @@ const App = () => {
         {
           path:"",
           element:<RootLayout/>,
+          errorElement:<RoutingError/>,
           children:[
             {
                path:'',
@@ -38,7 +43,7 @@ const App = () => {
             },
             {
                 path:'technologies',
-                element:<Technologies/>,
+                element: <Suspense><Technologies/></Suspense>,
                 children:[ 
                  {
                   path:'java',
